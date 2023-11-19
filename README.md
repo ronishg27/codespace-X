@@ -1,1 +1,6 @@
 # codespace-X
+
+# guide
+
+    install the necessary dependencies for both server and client directories by the command `npm install`
+    and run the respective server using command `npm run dev`.
