@@ -4,6 +4,7 @@ import ForumPostForm from "./components/forumPostForm";
 import ForumPost from "./components/forumPost";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import LoginPage from "./components/loginPage";
+import SignupPage from "./components/signupPage";
 
 function App() {
   return (
@@ -14,11 +15,9 @@ function App() {
           <Route path="/" element={<ForumPost />} />
           <Route path="/createPost" element={<ForumPostForm />} />
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/signup" element={<SignupPage />}></Route>
         </Routes>
       </Router>
-
-      {/* <ForumPostForm />
-      <ForumPost /> */}
     </>
   );
 }

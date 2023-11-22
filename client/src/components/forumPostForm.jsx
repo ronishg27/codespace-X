@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const ForumPostForm = () => {
   const navigate = useNavigate();
@@ -8,8 +8,6 @@ const ForumPostForm = () => {
     author: "",
     date: "",
   });
-
-  // function onPost(){    }
 
   const [loading, setLoading] = useState(false);
 
@@ -48,6 +46,7 @@ const ForumPostForm = () => {
     }
   };
 
+  const formRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
     const currentDate = new Date();
@@ -68,6 +67,7 @@ const ForumPostForm = () => {
   return (
     <>
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
         className="bg-white py-5 px-10 rounded-md shadow-md max-w-screen-sm  mx-auto mt-4"
       >

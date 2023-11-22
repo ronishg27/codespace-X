@@ -22,14 +22,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    address: {
-      type: String,
-      required: true,
-    },
-    contactNumber: {
-      type: String,
-      required: true,
-    },
   },
   { timestamps: true }
 );
