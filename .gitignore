@@ -35,8 +35,6 @@ yarn-error.log
 # VSCode settings
 .vscode/
 
-# macOS
-.DS_Store
 
 # Windows
 Thumbs.db
