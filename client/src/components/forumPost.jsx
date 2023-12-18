@@ -7,7 +7,7 @@ const ForumPost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5174/api/forumFeed");
+        const response = await fetch("http://localhost:8080/api/v1/fetch-post");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -39,7 +39,9 @@ const ForumPost = () => {
                 <p className="italic">Author: {post.author}</p>
                 <p className="italic">Date: {post.date}</p>
               </div>
+
               <div className="p-4">{post.content}</div>
+              {/* <CommentBox comments={"post._id"} /> */}
             </div>
           ))}
       </div>

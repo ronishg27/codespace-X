@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+
 function LoginPage() {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -19,7 +21,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5174/api/login", {
+      const response = await fetch("http://localhost:8080/api/v1/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,8 +30,16 @@ function LoginPage() {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const accessToken = data.data.accessToken;
+        Cookies.set("accessToken", accessToken, {
+          expires: 1,
+          httpOnly: true,
+          secure: true,
+        });
+
         console.log("Login successful.");
-        navigate("/profile");
+        navigate("/feed");
       } else {
         console.error("Error logging in.");
       }

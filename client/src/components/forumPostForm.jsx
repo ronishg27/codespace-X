@@ -22,13 +22,16 @@ const ForumPostForm = () => {
   const onPost = async (postData) => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5174/api/uploadFormData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
+      const response = await fetch(
+        "http://localhost:8080/api/v1/post/create-post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();

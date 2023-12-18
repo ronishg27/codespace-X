@@ -1,13 +1,11 @@
-import Drawer from "./drawer";
+// import Drawer from "./drawer";
 // import ForumPost from "./forumPost";
 // import ForumPostForm from "./forumPostForm";
 function Navbar() {
   return (
     <>
       <div className="navbar bg-base-100">
-        <div className="flex-none">
-          <Drawer />
-        </div>
+        <div className="flex-none"></div>
 
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">CodeSpaceX</a>
