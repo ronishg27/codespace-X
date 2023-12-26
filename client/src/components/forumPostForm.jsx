@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Logout } from "./logout";
 const ForumPostForm = () => {
   const navigate = useNavigate();
   const [post, setPost] = useState({
@@ -134,6 +135,9 @@ const ForumPostForm = () => {
         >
           {loading ? "Posting..." : "Post"}
         </button>
+        <div>
+          <Logout />
+        </div>
       </form>
     </>
   );

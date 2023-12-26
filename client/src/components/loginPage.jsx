@@ -1,6 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useNavigate, Link } from "react-router-dom";
+
+const setCookie = (name, value, days) => {
+  const expirationDate = new Date();
+  expirationDate.setTime(expirationDate.getTime() + days * 24 * 60 * 60 * 1000);
+  const expires = `expires=${expirationDate.toUTCString()}`;
+  document.cookie = `${name}=${value};${expires};path=/`;
+};
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -30,16 +36,16 @@ function LoginPage() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        const accessToken = data.data.accessToken;
-        Cookies.set("accessToken", accessToken, {
-          expires: 1,
-          httpOnly: true,
-          secure: true,
-        });
+        const responseJSON = await response.json();
+        console.log(responseJSON);
+        const { accessToken, refreshToken } = responseJSON.data;
+
+        //TODO:  cookies section
+        setCookie("refreshToken", refreshToken, 7);
+        setCookie("accessToken", accessToken, 1);
 
         console.log("Login successful.");
-        navigate("/feed");
+        navigate("/create-post");
       } else {
         console.error("Error logging in.");
       }
@@ -99,6 +105,12 @@ function LoginPage() {
                   Login
                 </button>
               </div>
+              <p>
+                Don&apos;t have an account.{" "}
+                <Link to="/signup" className="text-blue-500">
+                  Create new account.
+                </Link>
+              </p>
             </div>
           </form>
         </div>

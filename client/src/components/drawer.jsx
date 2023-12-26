@@ -20,19 +20,20 @@ function Drawer() {
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <li>
-              <a className="btn btn-ghost normal-case text-xl custom-link">
+              <p className="btn btn-ghost normal-case text-xl custom-link">
                 CodeSpaceX
-              </a>
+              </p>
             </li>
+            {/* 
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/createpost">Create Forum Post</Link>
+              <Link to="/create-post">Create Forum Post</Link>
             </li>
             <li>
               <Link to="/">Events</Link>
-            </li>
+            </li> */}
 
             {/* Move Login and Register buttons to the bottom */}
             <div className="mt-auto">

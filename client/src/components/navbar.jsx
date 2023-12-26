@@ -1,6 +1,3 @@
-// import Drawer from "./drawer";
-// import ForumPost from "./forumPost";
-// import ForumPostForm from "./forumPostForm";
 function Navbar() {
   return (
     <>
@@ -8,7 +5,9 @@ function Navbar() {
         <div className="flex-none"></div>
 
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">CodeSpaceX</a>
+          <a href="/feed" className="btn btn-ghost normal-case text-xl">
+            CodeSpaceX
+          </a>
         </div>
         <div className="flex-none">
           <button className="btn btn-square btn-ghost">
@@ -28,8 +27,6 @@ function Navbar() {
           </button>
         </div>
       </div>
-      {/* <ForumPostForm /> */}
-      {/* <ForumPost /> */}
     </>
   );
 }

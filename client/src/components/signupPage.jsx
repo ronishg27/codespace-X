@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 function SignupPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -128,6 +129,12 @@ function SignupPage() {
                   Signup
                 </button>
               </div>
+              <p>
+                Already have account?{" "}
+                <Link to="/login" className="text-blue-500">
+                  Login instead.
+                </Link>
+              </p>
             </div>
           </form>
         </div>
