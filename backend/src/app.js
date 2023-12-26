@@ -5,10 +5,10 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  })
+	cors({
+		origin: process.env.CORS_ORIGIN,
+		credentials: true,
+	})
 );
 
 app.use(express.json({ limit: "16kb" }));
@@ -21,7 +21,7 @@ import userRouter from "./routes/user.routes.js";
 import postRouter from "./routes/post.routes.js";
 // routes declarations or usage
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/post", postRouter);
+app.use("/api/v1/posts", postRouter);
 // app.get("/", (req, res) => {
 //   res.send("hello");
 // });
