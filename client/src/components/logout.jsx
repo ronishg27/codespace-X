@@ -1,5 +1,6 @@
-import { Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const getCookie = (name) => {
 	const value = `; ${document.cookie}`;
@@ -7,8 +8,24 @@ const getCookie = (name) => {
 	if (parts.length === 2) return parts.pop().split(";").shift();
 };
 
+const handleClearCookies = () => {
+	// Clear all cookies
+	document.cookie.split(";").forEach((c) => {
+		document.cookie = c
+			.replace(/^ +/, "")
+			.replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+	});
+};
+
 export const Logout = () => {
+	const navigate = useNavigate();
 	const accessToken = getCookie("accessToken");
+	useEffect(() => {
+		if (!accessToken) {
+			navigate("/a");
+			// throw new Error("Access Token not found.");
+		}
+	}, [accessToken, navigate]);
 	const handleLogout = async (e) => {
 		e.preventDefault();
 		try {
@@ -23,8 +40,9 @@ export const Logout = () => {
 				}
 			);
 			if (response.ok) {
+				handleClearCookies();
 				console.log("Logout successful.");
-				Navigate("/signup");
+				navigate("/a");
 			} else {
 				const errorData = await response.json();
 				console.error("Error logging out. ", errorData);
@@ -35,7 +53,7 @@ export const Logout = () => {
 	};
 
 	return (
-		<Button variant="contained" onClick={handleLogout}>
+		<Button variant="outlined" onClick={handleLogout}>
 			Logout
 		</Button>
 	);

@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+// import { Logout } from "./logout";
+import { Link } from "react-router-dom";
 
 const ForumPost = () => {
 	const [postData, setPostData] = useState(null);
@@ -42,14 +44,19 @@ const ForumPost = () => {
 
 	return (
 		<>
-			<div className="border w-1/2 m-auto rounded-md p-4">
+			<div className="border w-3/4 m-auto rounded-md p-4">
 				<h1 className="text-3xl font-bold mb-10">CodeSpaceX Forum Posts</h1>
 				{postData &&
 					postData.map((post) => (
 						<div key={post._id} className="mb-8">
 							<div className="bg-gray-200 p-2 border-b">
 								<h2 className="text-xl font-bold">{post.title}</h2>
-								<p className="italic">Author: {post.author.username}</p>
+								<p className="italic">
+									Author:{" "}
+									<Link to={`/u/profile/${post.author.username}`}>
+										{post.author.username}
+									</Link>
+								</p>
 								<p className="italic">Date: {getDate(new Date(post.date))}</p>
 							</div>
 
@@ -57,7 +64,9 @@ const ForumPost = () => {
 							{/* <CommentBox comments={"post._id"} /> */}
 						</div>
 					))}
+				{/* <Logout /> */}
 			</div>
+			{/* <div>{isLoggedIn() ? <Logout /> : ""}</div> */}
 		</>
 	);
 };

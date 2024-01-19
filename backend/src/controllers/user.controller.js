@@ -222,4 +222,69 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 	}
 });
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken };
+const getUserProfile = asyncHandler(async (req, res) => {
+	const username =
+		req.params.username === ":user-profile"
+			? req.user.username
+			: req.params.username;
+	// console.log(username);
+	if (!username?.trim()) {
+		throw new ApiError(400, "Username is missing.");
+	}
+	console.log(username);
+	console.log(req.user.username);
+	console.log(req.params.username);
+	const postAggregate = await User.aggregate([
+		{
+			$match: {
+				username: username?.toLowerCase(),
+			},
+		},
+		{
+			$lookup: {
+				from: "posts",
+				localField: "_id",
+				foreignField: "author",
+				as: "postedPosts",
+			},
+		},
+		{
+			$addFields: {
+				postCount: {
+					$size: "$postedPosts",
+				},
+			},
+		},
+		{
+			$project: {
+				fullname: 1,
+				username: 1,
+				postCount: 1,
+				email: 1,
+			},
+		},
+	]);
+
+	if (!postAggregate?.length) {
+		throw new ApiError(404, "Post does not exist.");
+	}
+	console.log(postAggregate);
+
+	return res
+		.status(200)
+		.json(
+			new ApiResponse(
+				200,
+				postAggregate[0],
+				"User details fetched successfully."
+			)
+		);
+});
+
+export {
+	registerUser,
+	loginUser,
+	logoutUser,
+	refreshAccessToken,
+	getUserProfile,
+};

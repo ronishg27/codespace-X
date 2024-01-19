@@ -1,33 +1,22 @@
-/* eslint-disable no-unused-vars */
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
-// import Navbar from "./components/navbar";
-// import ForumPostForm from "./components/forumPostForm";
-// import ForumPost from "./components/forumPost";
-// import LoginPage from "./components/loginPage";
-// import SignupPage from "./components/signupPage";
-// import Profile from "./components/profile";
+import { Navbar, SignupPage } from "./index.js";
+import Account from "./components/account.jsx";
+import User from "./components/user.jsx";
 
-import {
-	Navbar,
-	ForumPost,
-	ForumPostForm,
-	LoginPage,
-	SignupPage,
-} from "./index.js";
+import NotFound from "./components/notFound.jsx";
 
 function App() {
 	return (
 		<>
 			<Navbar />
+
 			<Router>
 				<Routes>
 					<Route path="/" element={<SignupPage />} />
-					<Route path="/signup" element={<SignupPage />} />
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/create-post" element={<ForumPostForm />} />
-					<Route path="/feed" element={<ForumPost />} />
-					{/* <Route path="/profile" element={<Profile />} /> */}
+					<Route path="/a/*" element={<Account />} />
+					<Route path="/u/*" element={<User />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
 		</>

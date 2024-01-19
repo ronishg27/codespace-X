@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Logout } from "./logout";
+
 const ForumPostForm = () => {
 	const navigate = useNavigate();
 	const [post, setPost] = useState({
@@ -78,7 +78,7 @@ const ForumPostForm = () => {
 			author: "",
 			date: "",
 		});
-		navigate("/");
+		navigate("/u");
 	};
 
 	return (
@@ -86,7 +86,7 @@ const ForumPostForm = () => {
 			<form
 				ref={formRef}
 				onSubmit={handleSubmit}
-				className="bg-white py-5 px-10 rounded-md shadow-md max-w-screen-sm  mx-auto mt-4"
+				className="bg-slate-100 py-5 px-10 rounded-md shadow-md max-w-screen-sm  mx-auto w-3/4  mt-4"
 			>
 				<div className="mb-4 m-auto">
 					<h1 className="text-3xl font-bold mb-10">Create your post</h1>
@@ -131,9 +131,6 @@ const ForumPostForm = () => {
 				>
 					{loading ? "Posting..." : "Post"}
 				</button>
-				<div>
-					<Logout />
-				</div>
 			</form>
 		</>
 	);
