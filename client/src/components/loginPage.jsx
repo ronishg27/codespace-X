@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import authService from "../services/auth.service";
 
 const setCookie = (name, value, days) => {
 	const expirationDate = new Date();
@@ -23,34 +24,46 @@ function LoginPage() {
 		});
 	};
 
+	// const handleLogin = async (e) => {
+	// 	e.preventDefault();
+
+	// 	try {
+	// 		const response = await fetch("http://localhost:8080/api/v1/users/login", {
+	// 			method: "POST",
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 			},
+	// 			body: JSON.stringify(credentials),
+	// 		});
+
+	// 		if (response.ok) {
+	// 			const responseJSON = await response.json();
+	// 			console.log(responseJSON);
+	// 			const { accessToken, refreshToken } = responseJSON.data;
+
+	// 			//TODO:  cookies section
+	// 			setCookie("refreshToken", refreshToken, 7);
+	// 			setCookie("accessToken", accessToken, 1);
+
+	// 			console.log("Login successful.");
+	// 			navigate("/u");
+	// 		} else {
+	// 			console.error("Error logging in.");
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("Error logging in: ", error.message);
+	// 	}
+	// };
+
 	const handleLogin = async (e) => {
 		e.preventDefault();
-
-		try {
-			const response = await fetch("http://localhost:8080/api/v1/users/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(credentials),
-			});
-
-			if (response.ok) {
-				const responseJSON = await response.json();
-				console.log(responseJSON);
-				const { accessToken, refreshToken } = responseJSON.data;
-
-				//TODO:  cookies section
-				setCookie("refreshToken", refreshToken, 7);
-				setCookie("accessToken", accessToken, 1);
-
-				console.log("Login successful.");
-				navigate("/u");
-			} else {
-				console.error("Error logging in.");
-			}
-		} catch (error) {
-			console.error("Error logging in: ", error.message);
+		const response = await authService.login(credentials);
+		if (response) {
+			const { accessToken, refreshToken } = response.data;
+			setCookie("refreshToken", refreshToken, 7);
+			setCookie("accessToken", accessToken, 1);
+			console.log("Login successful.");
+			navigate("/u");
 		}
 	};
 

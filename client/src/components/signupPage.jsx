@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import authService from "../services/auth.service";
 
 function SignupPage() {
 	const navigate = useNavigate();
@@ -19,31 +20,40 @@ function SignupPage() {
 		});
 	};
 
+	// const handleSignup = async (e) => {
+	// 	e.preventDefault();
+	// 	try {
+	// 		const response = await fetch(
+	// 			"http://localhost:8080/api/v1/users/register",
+	// 			{
+	// 				method: "POST",
+	// 				headers: {
+	// 					"Content-Type": "application/json",
+	// 				},
+	// 				body: JSON.stringify(user),
+	// 			}
+	// 		);
+
+	// 		if (response.ok) {
+	// 			console.log("Signup successful.");
+	// 			navigate("/a");
+	// 		} else {
+	// 			console.log("Error registering. Status:", response.status);
+	// 			// Try to log the response body for more details
+	// 			const errorData = await response.json();
+	// 			console.log("Error data:", errorData);
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("Error signing up: ", error.message);
+	// 	}
+	// };
+
 	const handleSignup = async (e) => {
 		e.preventDefault();
-		try {
-			const response = await fetch(
-				"http://localhost:8080/api/v1/users/register",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(user),
-				}
-			);
-
-			if (response.ok) {
-				console.log("Signup successful.");
-				navigate("/a");
-			} else {
-				console.log("Error registering. Status:", response.status);
-				// Try to log the response body for more details
-				const errorData = await response.json();
-				console.log("Error data:", errorData);
-			}
-		} catch (error) {
-			console.error("Error signing up: ", error.message);
+		const response = authService.signup(user);
+		if (response) {
+			console.log("Signup successful.");
+			navigate("/a");
 		}
 	};
 

@@ -16,7 +16,7 @@ router.route("/login").post(loginUser);
 
 // using middleware to verify jwt and clearing the tokens while logging out
 router.route("/logout").post(verifyJWT, logoutUser);
-router.route("/logout").post(refreshAccessToken);
+router.route("/refresh-token").post(refreshAccessToken);
 router.route("/c/:username").get(verifyJWT, getUserProfile);
 
 export default router;
