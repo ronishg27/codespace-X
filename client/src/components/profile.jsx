@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import authService from "../services/auth.service";
 
 const Profile = () => {
 	const [userData, setUserData] = useState(null);
@@ -18,8 +19,8 @@ const Profile = () => {
 
 	useEffect(() => {
 		(async () => {
-			try {
-				const accessToken = getCookie("accessToken");
+			const accessToken = getCookie("accessToken");
+			/*try {
 				const response = await fetch(
 					`http://localhost:8080/api/v1/users/c/${username}`,
 					{
@@ -41,7 +42,9 @@ const Profile = () => {
 				setUserData(jsonData.data);
 			} catch (error) {
 				throw new Error(error.message);
-			}
+			} */
+			const response = authService.getUser(username, accessToken);
+			setUserData(response.data);
 		})();
 	}, [username]);
 	return (

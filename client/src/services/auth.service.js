@@ -103,12 +103,13 @@ const authService = {
 		return false;
 	},
 
-	getUser: async (username) => {
+	getUser: async (username, accessToken) => {
 		try {
 			const response = await fetch(`${API_URL}/users/c/${username}`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
 				},
 			});
 			if (response.ok) {
