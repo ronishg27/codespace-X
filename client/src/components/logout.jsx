@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
+import toast from "react-hot-toast";
 
 const getCookie = (name) => {
 	const value = `; ${document.cookie}`;
@@ -18,7 +19,7 @@ const getCookie = (name) => {
 // 	});
 // };
 
-export const Logout = () => {
+export const Logout = ({ renderAgain }) => {
 	const navigate = useNavigate();
 	const accessToken = getCookie("accessToken");
 	useEffect(() => {
@@ -53,13 +54,16 @@ export const Logout = () => {
 	// 		console.log("Error logging out. Error message: ", error.message);
 	// 	}
 	// };
-
+	const notifySuccess = (message) => toast.success(message);
+	const notifyFail = (error) => toast.error(error);
 	const handleLogout = async (e) => {
-		e.preventDefault();
 		const response = authService.logout(accessToken);
 		if (response) {
 			console.log("Logout successful.");
+			notifySuccess("Logout Successful");
 			navigate("/a");
+		} else {
+			notifyFail("Logout Failed");
 		}
 	};
 

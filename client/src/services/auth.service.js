@@ -40,6 +40,7 @@ const authService = {
 		return false;
 	},
 	signup: async (user) => {
+		
 		try {
 			const response = await fetch(`${API_URL}/users/register`, {
 				method: "POST",
@@ -104,6 +105,9 @@ const authService = {
 	},
 
 	getUser: async (username, accessToken) => {
+		if(!username){
+			return false;
+		}
 		try {
 			const response = await fetch(`${API_URL}/users/c/${username}`, {
 				method: "GET",
@@ -112,17 +116,14 @@ const authService = {
 					Authorization: `Bearer ${accessToken}`,
 				},
 			});
-			if (response.ok) {
-				console.log("User Fetched Successfully");
-				return await response.json();
-			} else {
-				console.log("Failed to get user.");
-				console.log(await response.json());
+			if(!response.ok){
+				throw new Error("Error while fetching user. ");
 			}
-		} catch (error) {
+			const jsonResponse = await response.json();
+			return jsonResponse;
+		} catch (error) {	
 			console.log("Auth Services Error:: getUser :: ", error);
 		}
-
 		return false;
 	},
 };

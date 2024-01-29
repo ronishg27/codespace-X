@@ -6,7 +6,11 @@ const Sidebar = ({ children }) => {
 	return (
 		<>
 			<div className="drawer lg:drawer-open ">
-				<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+				<input
+					id="my-drawer-2"
+					type="checkbox"
+					className="drawer-toggle"
+				/>
 				<div className="drawer-content flex flex-col items-center justify-center">
 					{/* Page content here */}
 					{children}
@@ -15,7 +19,10 @@ const Sidebar = ({ children }) => {
 					<ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content ">
 						{/* Sidebar content here */}
 						<li>
-							<Link to={`/u/profile/:user-profile`} className="btn ">
+							<Link
+								to={`/u/profile/:user-profile`}
+								className="btn "
+							>
 								Profile
 							</Link>
 						</li>

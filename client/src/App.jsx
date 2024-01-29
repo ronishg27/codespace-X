@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./services/auth.service.js";
 import { login, logout } from "./store/authSlice.js";
+import isLoggedIn from "./utils/loggedInCheck.js";
+import { Toaster } from "react-hot-toast";
 
 function App() {
 	// eslint-disable-next-line no-unused-vars
@@ -32,6 +34,13 @@ function App() {
 			.finally(() => setLoading(false));
 	});
 
+	if (loading) {
+		return (
+			<>
+				<p>Loading...</p>
+			</>
+		);
+	}
 	return (
 		<>
 			<Navbar />
@@ -40,12 +49,17 @@ function App() {
 
 			<Router>
 				<Routes>
-					<Route path="/" element={<SignupPage />} />
+					{/* <Route path="/" element={ <SignupPage />} /> */}
+					<Route
+						path="/"
+						element={!isLoggedIn ? <SignupPage /> : <User />}
+					/>
 					<Route path="/a/*" element={<Account />} />
 					<Route path="/u/*" element={<User />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
+			<Toaster position="bottom-center" />
 		</>
 	);
 }

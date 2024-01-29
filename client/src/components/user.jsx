@@ -9,6 +9,8 @@ import Sidebar from "./sidebar";
 const User = () => {
 	const navigate = useNavigate();
 
+	// Callback function to trigger re-render
+
 	useEffect(() => {
 		if (!isLoggedIn()) {
 			// Redirect to the login page or another route if the user is not logged in

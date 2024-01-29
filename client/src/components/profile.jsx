@@ -1,7 +1,9 @@
-/* eslint-disable no-unused-vars */
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import authService from "../services/auth.service";
+// import  RandomAvatar  from "react-random-avatars";
+
 
 const Profile = () => {
 	const [userData, setUserData] = useState(null);
@@ -20,7 +22,7 @@ const Profile = () => {
 	useEffect(() => {
 		(async () => {
 			const accessToken = getCookie("accessToken");
-			/*try {
+	/*		try {
 				const response = await fetch(
 					`http://localhost:8080/api/v1/users/c/${username}`,
 					{
@@ -42,16 +44,22 @@ const Profile = () => {
 				setUserData(jsonData.data);
 			} catch (error) {
 				throw new Error(error.message);
-			} */
-			const response = authService.getUser(username, accessToken);
-			setUserData(response.data);
+			} 
+*/
+		if (username) {
+				const response = await authService.getUser(username, accessToken);
+				setUserData(response?.data);
+		}
 		})();
 	}, [username]);
+
 	return (
 		<>
 			<div className="card w-96 bg-base-200 shadow-xl m-auto ">
 				<div className="card-body mx-5 my-2">
 					<h2 className="card-title text-3xl py-4">User Profile</h2>
+					
+					
 					<li>
 						<span className="font-bold">Username: {userData?.username}</span>
 					</li>

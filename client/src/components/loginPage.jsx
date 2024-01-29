@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import authService from "../services/auth.service";
 
 const setCookie = (name, value, days) => {
 	const expirationDate = new Date();
-	expirationDate.setTime(expirationDate.getTime() + days * 24 * 60 * 60 * 1000);
+	expirationDate.setTime(
+		expirationDate.getTime() + days * 24 * 60 * 60 * 1000
+	);
 	const expires = `expires=${expirationDate.toUTCString()}`;
 	document.cookie = `${name}=${value};${expires};path=/`;
 };
+
+const notify = () => toast.success("Login Successful");
+const notifyFail = (error) => toast.error(error);
 
 function LoginPage() {
 	const navigate = useNavigate();
@@ -63,7 +69,10 @@ function LoginPage() {
 			setCookie("refreshToken", refreshToken, 7);
 			setCookie("accessToken", accessToken, 1);
 			console.log("Login successful.");
+			notify();
 			navigate("/u");
+		} else {
+			notifyFail("Invalid Credentials");
 		}
 	};
 
@@ -114,13 +123,19 @@ function LoginPage() {
 
 							{/* Submit button */}
 							<div>
-								<button type="submit" className="btn btn-primary w-full">
+								<button
+									type="submit"
+									className="btn btn-primary w-full"
+								>
 									Login
 								</button>
 							</div>
 							<p>
 								Don&apos;t have an account.{" "}
-								<Link to="/a/register" className="text-blue-500">
+								<Link
+									to="/a/register"
+									className="text-blue-500"
+								>
 									Create new account.
 								</Link>
 							</p>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import authService from "../services/auth.service";
+import isLoggedIn from "../utils/loggedInCheck";
+import toast from "react-hot-toast";
 
 function SignupPage() {
 	const navigate = useNavigate();
@@ -48,15 +50,27 @@ function SignupPage() {
 	// 	}
 	// };
 
+	const registerNotify = () => {
+		toast.success("Signup Successful");
+	};
+	const signupFailedNotify = () => {
+		toast.error("Failed to Signup");
+	};
+
 	const handleSignup = async (e) => {
 		e.preventDefault();
 		const response = authService.signup(user);
 		if (response) {
+			registerNotify();
 			console.log("Signup successful.");
 			navigate("/a");
+		} else {
+			signupFailedNotify();
 		}
 	};
-
+	if (isLoggedIn()) {
+		navigate("/u");
+	}
 	return (
 		<>
 			{/* Main content area */}
@@ -136,7 +150,10 @@ function SignupPage() {
 
 							{/* Submit button */}
 							<div>
-								<button type="submit" className="btn btn-primary w-full">
+								<button
+									type="submit"
+									className="btn btn-primary w-full"
+								>
 									Signup
 								</button>
 							</div>

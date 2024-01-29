@@ -1,9 +1,12 @@
 function Navbar() {
 	return (
-		<div className="sticky">
-			<div className=" navbar bg-base-100 ">
+		<div className="sticky ">
+			<div className="navbar">
 				<div className="flex-1">
-					<a href="/u" className="btn btn-ghost normal-case text-xl ">
+					<a
+						href="/"
+						className="btn btn-ghost normal-case text-xl bg-base-100 shadow-sm"
+					>
 						CodeSpace-X
 					</a>
 				</div>

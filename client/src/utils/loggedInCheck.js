@@ -12,7 +12,7 @@ function isLoggedIn() {
 	return isLoggedInCookie ? true : false;
 	// } catch (error) {
 	// 	console.log("accessToken not found...");
-	// }
+	// } 
 }
 
 // Example usage

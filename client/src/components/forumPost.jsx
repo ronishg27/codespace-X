@@ -45,28 +45,37 @@ const ForumPost = () => {
 	return (
 		<>
 			<div className="border w-3/4 m-auto rounded-md p-4">
-				<h1 className="text-3xl font-bold mb-10">CodeSpaceX Forum Posts</h1>
+				<h1 className="text-3xl font-bold mb-10">
+					CodeSpaceX Forum Posts
+				</h1>
 				{postData &&
 					postData.map((post) => (
-						<div key={post._id} className="mb-8">
+						<div key={post._id} className="mb-8 border shadow-sm">
 							<div className="bg-gray-200 p-2 border-b">
-								<h2 className="text-xl font-bold">{post.title}</h2>
-								<p className="italic">
-									Author:{" "}
-									<Link to={`/u/profile/${post.author.username}`}>
-										{post.author.username}
-									</Link>
-								</p>
-								<p className="italic">Date: {getDate(new Date(post.date))}</p>
+								<h2 className="text-xl font-bold">
+									{post.title}
+								</h2>
+								<div className="flex flex-wrap justify-between">
+									<span className="italic">
+										Author:{" "}
+										<Link
+											className="font-semibold"
+											to={`/u/profile/${post.author.username}`}
+										>
+											{post.author.username}
+										</Link>
+									</span>
+									<span className="italic">
+										Date: {getDate(new Date(post.date))}
+									</span>
+								</div>
 							</div>
 
 							<div className="p-4">{post.content}</div>
 							{/* <CommentBox comments={"post._id"} /> */}
 						</div>
 					))}
-				{/* <Logout /> */}
 			</div>
-			{/* <div>{isLoggedIn() ? <Logout /> : ""}</div> */}
 		</>
 	);
 };

@@ -3,12 +3,13 @@ import { ApiError } from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken";
-import {
-	validateEmail,
-	validateUsername,
-	validateFullName,
-	validatePassword,
-} from "../utils/validators.js";
+import { faker } from "@faker-js/faker";
+// import {
+// 	validateEmail,
+// 	validateUsername,
+// 	validateFullName,
+// 	validatePassword,
+// } from "../utils/validators.js";
 
 const generateAccessAndRefreshToken = async (userId) => {
 	try {
@@ -35,7 +36,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 // registerUser route method
 
 const registerUser = asyncHandler(async (req, res) => {
-	console.log("checkpoint from reg");
+
 	// extracting credentials from frontend (req.body)
 	// validation of user entered data
 	// check if user exist with received username and email
@@ -59,6 +60,7 @@ const registerUser = asyncHandler(async (req, res) => {
 	//   throw new ApiError(400, "All fields are compulsory and must be valid.");
 	// }
 
+	// checking if user exist
 	const existedUser = await User.findOne({
 		$or: [{ username }, { email }],
 	});
@@ -232,8 +234,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
 		throw new ApiError(400, "Username is missing.");
 	}
 	console.log(username);
-	console.log(req.user.username);
-	console.log(req.params.username);
 	const postAggregate = await User.aggregate([
 		{
 			$match: {
@@ -268,14 +268,20 @@ const getUserProfile = asyncHandler(async (req, res) => {
 	if (!postAggregate?.length) {
 		throw new ApiError(404, "Post does not exist.");
 	}
-	console.log(postAggregate);
+	// console.log(postAggregate);
+	const avatar = faker.image.url();
+
+	const returnData = {
+		...postAggregate[0],
+		avatar,
+	}
 
 	return res
 		.status(200)
 		.json(
 			new ApiResponse(
 				200,
-				postAggregate[0],
+				returnData,
 				"User details fetched successfully."
 			)
 		);
