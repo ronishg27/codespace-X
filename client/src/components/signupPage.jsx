@@ -64,9 +64,7 @@ function SignupPage() {
 			registerNotify();
 			console.log("Signup successful.");
 			navigate("/a");
-		} else {
-			signupFailedNotify();
-		}
+		} else signupFailedNotify();
 	};
 	if (isLoggedIn()) {
 		navigate("/u");
