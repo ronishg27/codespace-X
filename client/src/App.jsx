@@ -1,9 +1,4 @@
-import {
-	Routes,
-	Route,
-	BrowserRouter as Router,
-	// Outlet,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
 import { Navbar, SignupPage } from "./index.js";
 import Account from "./components/account.jsx";

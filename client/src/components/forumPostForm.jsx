@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+// import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const ForumPostForm = () => {
@@ -29,6 +30,8 @@ const ForumPostForm = () => {
 
 		return cookieValue || "";
 	}
+	// const notifySuccess = toast.success("Post successfully uploaded");
+	// const notifyFail = toast.error("Failed to upload");
 
 	const onPost = async (postData) => {
 		try {
@@ -50,9 +53,11 @@ const ForumPostForm = () => {
 			if (response.ok) {
 				const result = await response.json();
 				console.log("Form data uploaded successfully:", result);
+				// notifySuccess();
 				// You can handle the success response as needed
 			} else {
 				console.error("Failed to upload form data");
+				// notifyFail();
 				// Handle the error response
 			}
 		} catch (error) {
@@ -89,7 +94,9 @@ const ForumPostForm = () => {
 				className="bg-slate-100 py-5 px-10 rounded-md shadow-md max-w-screen-sm  mx-auto w-3/4  mt-4"
 			>
 				<div className="mb-4 m-auto">
-					<h1 className="text-3xl font-bold mb-10">Create your post</h1>
+					<h1 className="text-3xl font-bold mb-10">
+						Create your post
+					</h1>
 					<label
 						htmlFor="title"
 						className="block text-xl font-medium text-gray-600"
@@ -119,6 +126,7 @@ const ForumPostForm = () => {
 						name="content"
 						value={post.content}
 						onChange={handleChange}
+						rows="10"
 						className="w-10/12 px-3 py-2 border-2 rounded-md"
 						required
 					/>
