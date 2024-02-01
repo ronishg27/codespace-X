@@ -6,7 +6,7 @@ CodeSpaceX is a versatile platform developed using the MERN (MongoDB, Express.js
 
 - **User-Friendly Interface**: A clean and intuitive interface ensures a smooth user experience, allowing users to focus on sharing their content effortlessly.
 
-- **Content Posting**: Easily post and share your content, including code snippets, articles, and multimedia, with a straightforward content creation process.
+- **Content Posting**: Easily post and share your content, including code snippets, articles with a straightforward content creation process.
 
 - **MERN Stack**: Built on the MERN stack, CodeSpaceX leverages the power of MongoDB for data storage, Express.js for server-side logic, React for the front-end, and Node.js for server-side runtime.
 
@@ -48,7 +48,7 @@ Contributions are welcome! If you have ideas for improvements, new features, or 
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [Ronish](https://github.com/ronishg27). 
 
 ---
 
